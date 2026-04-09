@@ -1,0 +1,29 @@
+{
+  "version": "1",
+  "displayMode": "wizard",
+  "wizardSteps": [
+    {
+      "id": "config",
+      "title": "Configure Scan",
+      "description": "Set up the security scan parameters",
+      "fieldIds": ["severity", "includeDevDeps"],
+      "toolName": "configure_scan"
+    },
+    {
+      "id": "target",
+      "title": "Select Target",
+      "description": "Choose what to scan",
+      "fieldIds": ["repo", "branch"],
+      "toolName": "prepare_scan"
+    },
+    {
+      "id": "auth",
+      "title": "Authentication",
+      "description": "Provide credentials if needed",
+      "fieldIds": ["token"],
+      "toolName": "authenticate"
+    }
+  ],
+  "finalTool": "run_scan",
+  "finalResultFormat": "markdown"
+}

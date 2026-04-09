@@ -1,0 +1,36 @@
+{
+  "version": "1",
+  "displayMode": "form",
+  "primaryTool": "analyze_repo",
+  "fields": [
+    {
+      "id": "repo",
+      "label": "GitHub Repository",
+      "description": "Paste a GitHub URL or enter owner/repo to scan for security vulnerabilities, hardcoded secrets, and insecure patterns",
+      "placeholder": "https://github.com/owner/repo or owner/repo",
+      "fieldType": "url",
+      "validation": {
+        "required": true,
+        "pattern": "^https://github\\.com/.+|^[a-zA-Z0-9-]+\\.[a-zA-Z0-9-._]+/[a-zA-Z0-9-._]+$",
+        "patternHint": "Paste a GitHub URL or use format: owner/repo"
+      }
+    },
+    {
+      "id": "branch",
+      "label": "Branch",
+      "description": "Leave blank to use the repository's default branch",
+      "placeholder": "main",
+      "fieldType": "text",
+      "validation": {
+        "required": false
+      }
+    }
+  ],
+  "resultFormat": "markdown",
+  "showPoweredBy": true,
+  "exampleQueries": [
+    "https://github.com/facebook/react",
+    "https://github.com/microsoft/vscode",
+    "vercel/next.js"
+  ]
+}

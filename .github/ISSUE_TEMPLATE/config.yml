@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: AgentUIManifest Discord
+    url: https://discord.gg/zigzag
+    about: Join our Discord for real-time discussion about AgentUIManifest.
+  - name: Documentation
+    url: https://github.com/zigzag-ai/agentuimanifest/tree/main/docs
+    about: Check out the full specification and examples.

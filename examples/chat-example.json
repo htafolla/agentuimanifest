@@ -1,0 +1,15 @@
+{
+  "version": "1",
+  "displayMode": "chat",
+  "chat": {
+    "systemPrompt": "You are a helpful code assistant. Guide users through their questions step by step.",
+    "temperature": 0.7,
+    "maxTurns": 20,
+    "toolChoice": "auto"
+  },
+  "exampleQueries": [
+    "How do I fix this security vulnerability?",
+    "What does this error mean?",
+    "Help me refactor this function"
+  ]
+}
