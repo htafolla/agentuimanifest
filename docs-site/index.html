@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgentUIManifest - Standard for Agent UI Schemas</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --bg: #0f172a;
+      --bg-light: #1e293b;
+      --bg-card: #1e293b;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border: #334155;
+      --code-bg: #0f172a;
+      --success: #22c55e;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    a:hover { color: var(--primary-dark); }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    header {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 20px;
+    }
+    .logo svg {
+      width: 32px;
+      height: 32px;
+    }
+    nav {
+      display: flex;
+      gap: 24px;
+    }
+    nav a {
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 500;
+    }
+    nav a:hover { color: var(--text); }
+
+    /* Hero */
+    .hero {
+      padding: 80px 0;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      font-size: 20px;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 32px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      background: var(--bg-card);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover {
+      background: var(--bg-light);
+    }
+
+    /* Schema Preview */
+    .schema-section {
+      padding: 40px 0;
+    }
+    .schema-section h2 {
+      font-size: 24px;
+      margin-bottom: 24px;
+    }
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      overflow-x: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    code {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .keyword { color: #c792ea; }
+    .string { color: #c3e88d; }
+    .number { color: #f78c6c; }
+    .property { color: #82aaff; }
+    .comment { color: #546e7a; }
+
+    /* Features */
+    .features {
+      padding: 60px 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .feature {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .feature h3 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+    .feature p {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--primary);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    /* Sections */
+    section {
+      padding: 60px 0;
+      border-top: 1px solid var(--border);
+    }
+    section h2 {
+      font-size: 28px;
+      margin-bottom: 16px;
+    }
+    section p {
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    /* Properties Grid */
+    .properties {
+      display: grid;
+      gap: 16px;
+    }
+    .property-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+    }
+    .property-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      color: var(--primary);
+      min-width: 160px;
+    }
+    .property-type {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--success);
+      background: rgba(34, 197, 94, 0.1);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .property-desc {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 32px; }
+      .features { grid-template-columns: 1fr; }
+      nav { display: none; }
+      .property-card { flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="logo">
+        <svg viewBox="0 0 32 32" fill="none">
+          <rect width="32" height="32" rx="8" fill="#6366f1"/>
+          <path d="M8 12h16M8 16h12M8 20h8" stroke="white" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        AgentUIManifest
+      </div>
+      <nav>
+        <a href="#schema">Schema</a>
+        <a href="#properties">Properties</a>
+        <a href="#examples">Examples</a>
+        <a href="https://github.com/htafolla/agentuimanifest" target="_blank">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>AgentUIManifest</h1>
+        <p>A standardized JSON schema for defining rich, interactive UI presentations for AI agents and tools.</p>
+        <div class="hero-actions">
+          <a href="#schema" class="btn btn-primary">
+            View Schema
+          </a>
+          <a href="https://github.com/htafolla/agentuimanifest" class="btn btn-secondary" target="_blank">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="schema" class="schema-section">
+      <div class="container">
+        <h2>Core Schema</h2>
+        <pre><code><span class="comment">// AgentUIManifest v1.0.0</span>
+{
+  <span class="property">"$schema"</span>: <span class="string">"https://json-schema.org/draft/2020-12"</span>,
+  <span class="property">"type"</span>: <span class="string">"object"</span>,
+  <span class="property">"title"</span>: <span class="string">"AgentUIManifest"</span>,
+  <span class="property">"description"</span>: <span class="string">"Schema for agent UI presentations"</span>,
+  
+  <span class="property">"properties"</span>: {
+    <span class="property">"id"</span>: {
+      <span class="property">"type"</span>: <span class="string">"string"</span>,
+      <span class="property">"description"</span>: <span class="string">"Unique identifier"</span>
+    },
+    <span class="property">"name"</span>: { <span class="property">"type"</span>: <span class="string">"string"</span> },
+    <span class="property">"version"</span>: { <span class="property">"type"</span>: <span class="string">"string"</span> },
+    <span class="property">"description"</span>: { <span class="property">"type"</span>: <span class="string">"string"</span> },
+    <span class="property">"icon"</span>: { <span class="property">"type"</span>: <span class="string">"string"</span> },
+    <span class="property">"color"</span>: { <span class="property">"type"</span>: <span class="string">"string"</span> },
+    
+    <span class="property">"presentation"</span>: {
+      <span class="property">"type"</span>: <span class="string">"object"</span>,
+      <span class="property">"properties"</span>: {
+        <span class="property">"type"</span>: { <span class="property">"type"</span>: <span class="string">"string"</span>, <span class="property">"enum"</span>: [<span class="string">"chat"</span>, <span class="string">"dashboard"</span>, <span class="string">"form"</span>, <span class="string">"canvas"</span>] },
+        <span class="property">"layout"</span>: { <span class="property">"type"</span>: <span class="string">"string"</span> },
+        <span class="property">"theme"</span>: { <span class="property">"type"</span>: <span class="string">"string"</span> },
+        <span class="property">"components"</span>: { <span class="property">"type"</span>: <span class="string">"array"</span> }
+      }
+    },
+    
+    <span class="property">"capabilities"</span>: {
+      <span class="property">"type"</span>: <span class="string">"object"</span>,
+      <span class="property">"properties"</span>: {
+        <span class="property">"streaming"</span>: { <span class="property">"type"</span>: <span class="string">"boolean"</span> },
+        <span class="property">"tool_calls"</span>: { <span class="property">"type"</span>: <span class="string">"boolean"</span> },
+        <span class="property">"file_upload"</span>: { <span class="property">"type"</span>: <span class="string">"boolean"</span> },
+        <span class="property">"voice"</span>: { <span class="property">"type"</span>: <span class="string">"boolean"</span> }
+      }
+    }
+  }
+}</code></pre>
+      </div>
+    </section>
+
+    <section id="properties">
+      <div class="container">
+        <h2>Core Properties</h2>
+        <div class="properties">
+          <div class="property-card">
+            <span class="property-name">id</span>
+            <span class="property-type">string</span>
+            <span class="property-desc">Unique identifier for the manifest</span>
+          </div>
+          <div class="property-card">
+            <span class="property-name">name</span>
+            <span class="property-type">string</span>
+            <span class="property-desc">Human-readable name</span>
+          </div>
+          <div class="property-card">
+            <span class="property-name">version</span>
+            <span class="property-type">string</span>
+            <span class="property-desc">Semantic version (e.g., "1.0.0")</span>
+          </div>
+          <div class="property-card">
+            <span class="property-name">description</span>
+            <span class="property-type">string</span>
+            <span class="property-desc">Brief description of the agent</span>
+          </div>
+          <div class="property-card">
+            <span class="property-name">icon</span>
+            <span class="property-type">string</span>
+            <span class="property-desc">URL or emoji for the agent icon</span>
+          </div>
+          <div class="property-card">
+            <span class="property-name">color</span>
+            <span class="property-type">string</span>
+            <span class="property-desc">Primary color (hex or CSS color)</span>
+          </div>
+          <div class="property-card">
+            <span class="property-name">presentation</span>
+            <span class="property-type">object</span>
+            <span class="property-desc">UI presentation configuration</span>
+          </div>
+          <div class="property-card">
+            <span class="property-name">capabilities</span>
+            <span class="property-type">object</span>
+            <span class="property-desc">Feature flags and capabilities</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="examples">
+      <div class="container">
+        <h2>Example Manifest</h2>
+        <pre><code>{
+  <span class="property">"id"</span>: <span class="string">"scout-agent"</span>,
+  <span class="property">"name"</span>: <span class="string">"Scout"</span>,
+  <span class="property">"version"</span>: <span class="string">"1.0.0"</span>,
+  <span class="property">"description"</span>: <span class="string">"Research and analysis agent"</span>,
+  <span class="property">"icon"</span>: <span class="string">"🔍"</span>,
+  <span class="property">"color"</span>: <span class="string">"#6366f1"</span>,
+  
+  <span class="property">"presentation"</span>: {
+    <span class="property">"type"</span>: <span class="string">"dashboard"</span>,
+    <span class="property">"layout"</span>: <span class="string">"research-console"</span>,
+    <span class="property">"components"</span>: [
+      { <span class="property">"type"</span>: <span class="string">"chat"</span>, <span class="property">"position"</span>: <span class="string">"left"</span> },
+      { <span class="property">"type"</span>: <span class="string">"results"</span>, <span class="property">"position"</span>: <span class="string">"right"</span> }
+    ]
+  },
+  
+  <span class="property">"capabilities"</span>: {
+    <span class="property">"streaming"</span>: <span class="keyword">true</span>,
+    <span class="property">"tool_calls"</span>: <span class="keyword">true</span>,
+    <span class="property">"file_upload"</span>: <span class="keyword">true</span>
+  }
+}</code></pre>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>Why AgentUIManifest?</h2>
+        <div class="features">
+          <div class="feature">
+            <div class="feature-icon">
+              <svg width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            </div>
+            <h3>Standardized</h3>
+            <p>Consistent schema across all agents and frameworks</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">
+              <svg width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </div>
+            <h3>Flexible</h3>
+            <p>Support for chat, dashboard, form, and canvas UIs</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">
+              <svg width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>Type-Safe</h3>
+            <p>Full TypeScript definitions and JSON Schema</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>AgentUIManifest is open source under MIT License</p>
+      <p style="margin-top: 8px;">
+        <a href="https://github.com/htafolla/agentuimanifest" target="_blank">GitHub</a> ·
+        <a href="https://github.com/htafolla/agentuimanifest/blob/main/SPEC.md" target="_blank">Specification</a> ·
+        <a href="https://github.com/htafolla/agentuimanifest/issues" target="_blank">Issues</a>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
