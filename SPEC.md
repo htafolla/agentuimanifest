@@ -1,8 +1,7 @@
 # AgentUIManifest Specification
 
 **Version:** 1.0  
-**Status:** Final  
-**Authors:** Zigzag Team  
+**Status:** Draft  
 **License:** Apache 2.0  
 
 ---
@@ -40,7 +39,7 @@ MCP tools expose `inputSchema` designed for LLMs — humans can't use them witho
 ### Design Principles
 
 - **Declarative**: Describes WHAT to show, not HOW to build it
-- **Minimal**: 4 display modes, 8 field types, 3 result formats
+- **Minimal**: 4 display modes, 6 field types, 3 result formats
 - **Validated**: Zod schema for registration-time + runtime validation
 - **Extensible**: Future modes via extension points
 
@@ -97,7 +96,7 @@ interface Field {
   hidden?: boolean;
 }
 
-type FieldType = 'text' | 'textarea' | 'url' | 'number' | 'select' | 'multiselect' | 'toggle' | 'readonly';
+type FieldType = 'text' | 'textarea' | 'url' | 'number' | 'select' | 'toggle';
 ```
 
 ### Validation
@@ -113,8 +112,6 @@ interface FieldValidation {
   max?: number;
   step?: number;
   options?: string[];
-  minSelect?: number;
-  maxSelect?: number;
 }
 ```
 
@@ -127,7 +124,7 @@ interface FieldValidation {
 | **form** | Single-page form, one tool call | 1-5 inputs, straightforward tools |
 | **chat** | Multi-turn streaming conversation | Agents that clarify intent |
 | **wizard** | Multi-step sequential forms | Complex workflows with decisions |
-| **viewer** | Read-only data display | Dashboards, auto-running agents |
+| **viewer** | Read-only data display | Dashboards, results |
 
 ---
 
@@ -137,12 +134,10 @@ interface FieldValidation {
 |------|-------------|------------|
 | **text** | Single-line input | minLength, maxLength, pattern |
 | **textarea** | Multi-line input | minLength, maxLength |
-| **url** | URL with validation | pattern, schemes |
+| **url** | URL input | pattern |
 | **number** | Numeric input | min, max, step |
-| **select** | Single dropdown | options[] |
-| **multiselect** | Multi-checkboxes | options[], minSelect, maxSelect |
+| **select** | Dropdown | options[] |
 | **toggle** | Boolean switch | — |
-| **readonly** | Display only | format (text\|badge\|code\|link) |
 
 ---
 
@@ -177,71 +172,44 @@ function validateAllFields(fields: Field[], values: Record<string, unknown>): Va
 
 ## 6. Governance
 
-_Developed via StringRay multi-advisor skill with agent analysis._
-
 ### Guiding Principles
 
 1. **Open by default** — Anyone can propose changes
 2. **Implementation proof** — Reference implementation preferred
-3. **Backward compatibility** — Breaking changes rare and carefully managed
-4. **Durability** — The standard that survives 20 years beats the one that changes often
+3. **Minimal bureaucracy** — Don't over-engineer a simple spec
+4. **Don't break consumers** — Backward compatibility preferred
 
-### Governance Phases
+### Model
 
-| Phase | Timeline | Model |
-|-------|----------|-------|
-| **V1** | 0-12 months | Benevolent dictatorship (core team) |
-| **V2** | 12-24 months | Technical steering committee (3 rotating seats) |
-| **V3** | 24+ months | Elected committee with formal voting |
+For v1, @htafolla is the maintainer.
 
-### Voting Mechanism
+- Submit RFCs as GitHub issues
+- Decisions made by maintainer with community input
+- Add formal governance when there are 10+ active contributors
 
-- **Minor/patch**: Simple majority (50%+1)
-- **Major (breaking)**: Super-majority (66%+1)
-- **Emergency**: 48-hour objection window
+### Simple Rules
 
-### Versioning
+- No CLA required — DCO implicit via PRs
+- No trademark restrictions — Use the name freely
+- 90 days deprecation warning for breaking changes (if needed)
+- Semantic versioning: `MAJOR.MINOR.PATCH`
 
-Semantic versioning: `MAJOR.MINOR.PATCH`
+### How to Propose Changes
 
-| Change | Notice Required |
-|--------|-----------------|
-| Patch | None |
-| Minor | None |
-| Major | 90-day deprecation + migration guide |
-
-### Proposal Process
-
-1. Submit RFC as GitHub issue (with reference implementation preferred)
-2. 30-day open comment period
-3. Vote per thresholds
-4. Implementation + release
-
-### IP & Licensing
-
-- **License**: Apache 2.0
-- **Trademark**: "AgentUIManifest" reserved
-- **Contributions**: CLA required
+1. Open a GitHub issue with your RFC
+2. Discuss in the comments
+3. PR with implementation
+4. Merged by maintainer
 
 ---
 
 ## 7. Adoption
 
-### Phases
-
-| Phase | Timeline | Goal |
-|--------|----------|------|
-| **Prove** | 0-6 months | Build tooling, 3-5 pilot agents |
-| **Grow** | 6-12 months | 10+ implementations, registry launched |
-| **Standardize** | 12-24 months | Foundation transfer, compliance cert |
-
-### Success Metrics
-
-| Metric | Year 1 | Year 2 |
-|--------|--------|--------|
-| Implementations | 10+ | 50+ |
-| Contributors | 50+ | 200+ |
-| GitHub Stars | 1K+ | 3K+ |
+| Phase | Goal |
+|--------|------|
+| **Prove** | Build tooling, 3-5 pilot agents |
+| **Grow** | 10+ implementations |
+| **Standardize** | Independent governance, compliance |
 
 ---
 
@@ -282,6 +250,10 @@ Semantic versioning: `MAJOR.MINOR.PATCH`
 ---
 
 ## 9. Changelog
+
+### [1.1] - 2026-04-11
+
+Simplified governance. Removed multiselect, readonly field types. Dropped CLA in favor of DCO. Status: Draft.
 
 ### [1.0] - 2026-04-09
 

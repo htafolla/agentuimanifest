@@ -58,11 +58,11 @@ But humans need guidance to use them. AgentUIManifest solves this:
 | **form** | Single-page form | 1-5 inputs, straightforward tools |
 | **chat** | Multi-turn streaming | Agents that clarify intent |
 | **wizard** | Multi-step forms | Complex workflows with decisions |
-| **viewer** | Read-only display | Dashboards, auto-running agents |
+| **viewer** | Read-only display | Dashboards, results |
 
 ### Field Types
 
-`text` · `textarea` · `url` · `number` · `select` · `multiselect` · `toggle` · `readonly`
+`text` · `textarea` · `url` · `number` · `select` · `toggle`
 
 ---
 
@@ -84,7 +84,6 @@ The full specification is in [`SPEC.md`](SPEC.md), covering:
 - Display modes
 - Field types & validation
 - Governance model
-- Adoption strategy
 
 ---
 
@@ -92,16 +91,18 @@ The full specification is in [`SPEC.md`](SPEC.md), covering:
 
 - [Zigzag](https://zigzag.ai) — Agent marketplace with AgentUIManifest support
 - [Scout](https://github.com/zigzag-ai/scout) — GitHub security scanner
+- [Ziggy](https://github.com/htafolla/ziggy-mcp) — Tweet generator MCP server
 
 ---
 
 ## Governance
 
-AgentUIManifest follows a 3-phase governance model:
+Simple and open:
 
-1. **Phase V1 (0-12mo)** — Benevolent dictatorship (current)
-2. **Phase V2 (12-24mo)** — Technical steering committee
-3. **Phase V3 (24mo+)** — Formal foundation
+- @htafolla is the current maintainer
+- Submit RFCs as GitHub issues
+- No CLA required (DCO via PRs)
+- Community governance added when there are 10+ active contributors
 
 See [`docs/governance/CHARTER.md`](docs/governance/CHARTER.md) for details.
 
@@ -110,9 +111,9 @@ See [`docs/governance/CHARTER.md`](docs/governance/CHARTER.md) for details.
 ## Contributing
 
 1. Read the [specification](SPEC.md)
-2. Submit an [RFC](.github/ISSUE_TEMPLATE/rfc-template.md)
-3. Implement and test
-4. Join the [Discord](https://discord.gg/zigzag)
+2. Open a GitHub issue describing your change
+3. Submit a PR
+4. Maintainer reviews and merges
 
 ---
 

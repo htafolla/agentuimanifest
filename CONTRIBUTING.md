@@ -1,51 +1,31 @@
 # Contributing to AgentUIManifest
 
-Thank you for your interest in contributing!
+Open and simple. Here's how:
 
-## How to Contribute
+## Quick Steps
 
-### 1. Propose Changes
+1. Open a GitHub issue describing your proposed change
+2. Discuss in the comments
+3. Fork, make your change, submit a PR
+4. Maintainer reviews and merges
 
-Submit an RFC (Request for Comments) via GitHub Issues:
+## Guidelines
 
-1. Create a new issue using the [RFC template](.github/ISSUE_TEMPLATE/rfc-template.md)
-2. Fill out all sections thoroughly
-3. Reference implementations are strongly preferred
-
-### 2. Code Reviews
-
-All changes go through code review:
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
-5. Address review feedback
-
-### 3. Standards
-
-- Follow the existing code style
-- Add tests for new features
-- Update documentation
-- Keep commits atomic
+- Follow the existing spec and example style
+- Keep JSON examples valid
+- Update the spec if you add new fields or modes
+- One logical change per PR
 
 ## Development
 
 ```bash
-# Clone the repo
 git clone https://github.com/htafolla/agentuimanifest.git
 cd agentuimanifest
-
-# Explore the examples
 ls examples/
 ```
 
-## Questions?
+## License
 
-- Discord: https://discord.gg/zigzag
-- GitHub Issues: https://github.com/htafolla/agentuimanifest/issues
-- Email: agentuimanifest@zigzag.ai
+By submitting a PR, you agree your contribution is licensed under Apache 2.0.
 
-## Code of Conduct
-
-All contributors are expected to follow our [Code of Conduct](docs/governance/CODE_OF_CONDUCT.md).
+No CLA required.
